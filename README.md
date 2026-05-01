@@ -118,7 +118,7 @@ Kullanıcı bu aracın kullanımından tamamen sorumludur. Yazar sistem hasarlar
 
 - 🌐 Web: [www.vedattascier.com](https://www.vedattascier.com)
 - 💻 GitHub: [github.com/vedattascier](https://github.com/vedattascier)
-- 📧 İletişim: vedattascier@gmail.com
+- 📧 İletişim: [(https://t.me/vedattascier)]
 
 ## Lisans
 
