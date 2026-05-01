@@ -1,170 +1,135 @@
-# Windows Yetki Yukseltme Araci
+# 🛡️ Windows Yetki Yukseltme Araci
 
-Windows isletim sistemleri icin kapsamli yetki yukseltme tespit ve guvenlik denetim araci.
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1+--blue?style=flat-square&logo=powershell)](https://docs.microsoft.com/powershell/)
+[![Windows](https://img.shields.io/badge/Windows-7+-brightgreen?style=flat-square&logo=windows)](https://www.microsoft.com/windows/)
+[![License](https://img.shields.io/badge/License-MIT-orange?style=flat-square)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-11.8-red?style=flat-square)]()
+[![Author](https://img.shields.io/badge/Author-Vedat%20Ta%C5%9F%C3%A7%C4%B1er-purple?style=flat-square)](https://github.com/vedattascier)
 
-## Ozellikler
+> Windows isletim sistemleri icin kapsamli yetki yukseltme tespit ve guvenlik denetim araci. WinPEAS benzeri ozelliklerle sistem guvenlik açiklarini tespit eder.
 
-- **Sistem Bilgileri**: Isletim sistemi, surum, mimari bilgileri
-- **Guvenlik Durumu**: Firewall, antivirus, sifreleme kontrolleri
-- **Yetki Yukseltme Tespiti**:
-  - Yazilabilir servisler
-  - Tirnaksiz service path'ler
-  - Autorun anahtarlari
-  - Zayif servis izinleri
-  - Token yetkileri (SeImpersonatePrivilege, SeDebugPrivilege)
-- **Kimlik Bilgisi Tespiti**:
-  - Registry sifreleri
-  - SAM veritabani
-  - Onbelleklenmis giris bilgileri
-  - WDigest durumu
-- **Ag Guvenligi**:
-  - SMBv1 kontrolu
-  - LLMNR durumu
-  - SMB imzalama
-- **Olay Analizi**:
-  - Basarisiz giris denemeleri
-  - Event log analizi
-- **Cozum Onerileri**: Tespit edilen riskler icin detayli onarim adimlari
+## 🚀 Ozellikler
 
-## Kullanim
+### 🔍 Yetki Yukseltme Tespiti
+- Yazilabilir servisler ve executable'lar
+- Tirnaksiz (unquoted) service path'ler
+- Autorun registry anahtarlari
+- Token yetkileri (SeImpersonatePrivilege, SeDebugPrivilege, vb.)
+- AlwaysInstallElevated kontrolu
+- PATH hijacking tespiti
+- DLL hijacking analizi
 
-### PowerShell Ayarlari
+### 🔐 Kimlik Bilgisi Tespiti
+- Registry sakli sifreleri
+- SAM veritabani analizi
+- Onbelleklenmis giris bilgileri
+- WDigest durumu
+- LSA sirlari
+- Tarayici sifreleri (Chrome, Edge, Firefox)
 
-Oncelikle PowerShell'de script calistirma yetkisi verin:
+### 🌐 Ag Guvenligi
+- SMBv1 kontrolu (EternalBlue riski)
+- LLMNR durumu
+- SMB imzalama
+- RDP NLA kontrolu
+- WinRM guvenlik ayarlari
+
+### 🖥️ Sistem Guvenligi
+- Windows Defender durumu
+- BitLocker sifreleme
+- UAC yapilandirmasi
+- LSA korumasi (PPL)
+- Credential Guard
+- Secure Boot durumu
+- Firewall profilleri
+
+### 📊 Raporlama
+- **HTML** - Modern, interaktif rapor
+- **JSON** - Programatik erisim
+- **CIS Benchmark** uyumluluk kontrolu
+- Detayli risk analizi ve cozum onerileri
+
+## 📦 Kurulum
 
 ```powershell
+# PowerShell script calistirma yetkisi
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Temel Kullanim
+## ▶️ Kullanim
 
 ```powershell
-# Scripti calistirin
+# Temel kullanim
 .\windows-yetki-yukseltme.ps1
-```
 
-### Detayli Kullanim
-
-```powershell
-# Tam tarama ile detayli sonuclar
+# Detayli tarama
 .\windows-yetki-yukseltme.ps1 -Detayli
 
-# CIS Benchmark uyumluluk kontrolu
-.\windows-yetki-yukseltme.ps1 -CIS
-
-# HTML formatinda rapor olustur
+# HTML rapor olustur
 .\windows-yetki-yukseltme.ps1 -HTML
 
-# JSON formatinda cikti al
+# JSON cikti
 .\windows-yetki-yukseltme.ps1 -JSON
 
-# Hizli tarama (daha az kontrol)
-.\windows-yetki-yukseltme.ps1 -Hizli
+# CIS Benchmark kontrolu
+.\windows-yetki-yukseltme.ps1 -CIS
 
-# Tam sistem taramasi
-.\windows-yetki-yukseltme.ps1 -Tam
-
-# Rengi kapat
-.\windows-yetki-yukseltme.ps1 -NoColor
-
-# Sonuclari dosyaya kaydet
-.\windows-yetki-yukseltme.ps1 -CiktiDosya "rapor.txt"
-
-# Birlikte kullanım örnekleri
-.\windows-yetki-yukseltme.ps1 -Detayli -HTML
-.\windows-yetki-yukseltme.ps1 -JSON -CiktiDosya "sonuc.json"
-.\windows-yetki-yukseltme.ps1 -Tam -CIS
+# Birlikte kullanim
+.\windows-yetki-yukseltme.ps1 -Detayli -HTML -CIS
+.\windows-yetki-yukseltme.ps1 -JSON -CiktiDosya "rapor.json"
 ```
 
-### Yonetici Yetkisi
-
-Bazi kontroller icin yonetici yetkisi gereklidir. PowerShell'i "Yonetici olarak calistir" ile baslatin.
-
-## Parametreler
+## 📋 Parametreler
 
 | Parametre | Aciklama |
 |-----------|----------|
-| `-Detayli` | Detayli tarama modu |
+| `-Detayli` | Detayli tarama modu (70+ kontrol) |
 | `-JSON` | JSON formatinda cikti |
-| `-HTML` | HTML rapor olustur |
+| `-HTML` | Modern HTML rapor olustur |
 | `-Tam` | Tam sistem taramasi |
-| `-Hizli` | Hizli tarama modu |
-| `-CiktiDosya` | Cikti dosyasi belirt |
-| `-NoColor` | Renkli ciktiyi kapat |
-| `-CIS` | CIS benchmark kontrolu |
+| `-Hizli` | Hizli tarama (temel kontroller) |
+| `-CIS` | CIS Benchmark uyumluluk |
+| `-NoColor` | Renksiz cikti |
+| `-CiktiDosya` | Sonucu dosyaya kaydet |
 
-## Sistem Gereksinimleri
+## 🖥️ Sistem Gereksinimleri
 
-- Windows 7 / Server 2008 veya ustü
-- PowerShell 3.0 veya ustü
-- Yonetici yetkileri (tüm kontroller icin)
+- **Isletim Sistemi**: Windows 7 / Server 2008 veya ustü
+- **PowerShell**: 3.0 veya ustü
+- **Yetki**: Yonetici (tüm kontroller icin)
 
-## Yazar
+## ⚠️ Yasal Sorumluluk
 
-**Vedat Tascier**
+> **ONEMLI**: Bu arac yalnizca yetkili guvenlik testleri ve sistem envanteri icin kullanilmalidir.
 
-- GitHub: https://github.com/vedattascier
-- Web: www.vedattascier.com
-
-## Yasal Sorumluluk
-
-Bu arac yalnizca yetkili guvenlik testleri ve sistem envanteri icin kullanilmalidir.
-
-**Yasaklar:**
+❌ **Yasaklar:**
 - Izinsiz sistemlere giris
 - Baskasinin sisteminde yetki yukseltme
 - Veri hirsizligi veya tahribat
 - Kisisel veri toplanmasi
 
-**Sorumluluk:**
+✅ **Sorumluluk:**
 Kullanici bu aracin kullanimindan tamamen sorumludur. Yazar sistem hasarlarindan veya yasal sorunlardan mesul tutulamaz.
 
-## GitHub'a Yukleme
+## 👨‍💻 Yazar
 
-### 1. GitHub Repository Olusturma
+**Vedat Tascier**
 
-1. GitHub'da yeni repository olusturun: https://github.com/new
-2. Repository adi: `windows-yetki-yukseltme`
-3. Acik kaynak olarak secin
-4. Repository olusturun
+- 🌐 Web: [www.vedattascier.com](https://www.vedattascier.com)
+- 💻 GitHub: [github.com/vedattascier](https://github.com/vedattascier)
 
-### 2. Yerel Bilgisayardan Yukleme
+## 📄 Lisans
 
-```bash
-# Klasore gidin
-cd C:\Users\vedat\CascadeProjects\WindowsAudit-TR
+**MIT License** - Tamamen Acik Kaynak
 
-# Git baslat
-git init
+Bu proje acik kaynaklidir ve topluluk tarafindan gelistirilmek uzere paylasilmistir. Herkes bu projeyi kullanabilir, degistirebilir ve gelistirebilir.
 
-# Dosyalari ekle
-git add .
+---
 
-# Commit yap
-git commit -m "Windows Yetki Yukseltme Araci v11.8"
+<div align="center">
 
-# Main branch olustur
-git branch -M main
+**Guvenlik her zaman oncelik olmalidir!**
 
-# Remote ekle
-git remote add origin https://github.com/vedattascier/windows-yetki-yukseltme.git
-
-# Yukle
-git push -u origin main
-```
-
-### 3. Git Kurulumu (Yoksa)
-
-```powershell
-# Winget ile
-winget install Git.Git
-
-# Veya choco ile
-choco install git
-```
-
-## Lisans
-
-MIT License - Tamamen Acik Kaynak
+</div>
 
 Bu proje acik kaynaklidir ve topluluk tarafindan gelistirilmek uzere paylasilmistir. Herkes bu projeyi kullanabilir, degistirebilir ve gelistirebilir.
