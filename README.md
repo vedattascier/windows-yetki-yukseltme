@@ -7,8 +7,7 @@
 [![Author](https://img.shields.io/badge/Author-Vedat%20Tascier-purple?style=flat-square)](https://github.com/vedattascier)
 [![GitHub](https://img.shields.io/badge/GitHub-vedattascier-blue?style=flat-square&logo=github)](https://github.com/vedattascier)
 
-> Windows işletim sistemleri icin kapsamlı yetki yukseltme tespit ve güvenlik denetim araci. WinPEAS benzeri özelliklerle sistem güvenlik açıklarını tespit eder.
-
+> Windows işletim sistemleri icin kapsamlı yetki yukseltme tespit ve güvenlik denetim araci.
 ## Özellikler
 
 ### Yetki Yükseltme Tespiti
