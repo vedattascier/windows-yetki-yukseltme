@@ -64,7 +64,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 .\windows-yetki-yukseltme.ps1
 
 # Detaylı tarama
-.\windows-yetki-yukseltme.ps1 -Detaylı
+.\windows-yetki-yukseltme.ps1 -Detayli
 
 # HTML rapor oluştur
 .\windows-yetki-yukseltme.ps1 -HTML
@@ -76,7 +76,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 .\windows-yetki-yukseltme.ps1 -CIS
 
 # Birlikte kullanım
-.\windows-yetki-yukseltme.ps1 -Detaylı -HTML -CIS
+.\windows-yetki-yukseltme.ps1 -Detayli -HTML -CIS
 .\windows-yetki-yukseltme.ps1 -JSON -CiktiDosya "rapor.json"
 ```
 
